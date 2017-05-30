@@ -7,7 +7,7 @@ class Search(BaseSearch):
     search_url = "https://ukutabs.com/page/{page}/?s={query}"
 
     def __init__(self, query):
-        super(UkuTabsSearch, self).__init__(query)
+        super(Search, self).__init__(query)
 
     def _get_number_of_pages(self):
         pagination = self.soup.find(class_='page-pagination')
@@ -21,4 +21,15 @@ class Search(BaseSearch):
             artist = a[0].string
             title = a[1].string
             url = a[1].get('href')
-            yield (typ, artist, title, url)
+            yield Tab(url, title, artist, None, typ)
+
+
+class Tab(BaseTab):
+    """docstring for Tab."""
+    def __init__(self, url, title, artist, rating, type_):
+        super(Tab, self).__init__(url, title, artist, rating, type_)
+
+    def _parse_title(self, soup):
+        import pdb; pdb.set_trace()
+        td = soup.find('strong', text="Title").parent
+        return td.next_sibling.find('span').text
