@@ -12,22 +12,22 @@ class Tab():
         self.type = type_
 
     def load(self):
-        _load_html()
-        _parse()
+        self._load_html()
+        self._parse()
 
     def _load_html(self):
-        self.html = requests.get(self.url)
+        self.html = requests.get(self.url).text
 
     def _parse(self):
         soup = BeautifulSoup(self.html, 'html.parser')
-        _parse_title(soup)
-        _parse_artist(soup)
-        _parse_album(soup)
-        _parse_difficulty(soup)
-        _parse_capo(soup)
-        _parse_type(soup)
-        _parse_rating(soup)
-        _parse_text(soup)
+        self.title = self._parse_title(soup)
+        self.artist = self._parse_artist(soup)
+        self.album = self._parse_album(soup)
+        self.difficulty = self._parse_difficulty(soup)
+        self.capo = self._parse_capo(soup)
+        self.type = self._parse_type(soup)
+        self.rating = self._parse_rating(soup)
+        self.text = self._parse_text(soup)
 
     def _parse_title(self, soup):
         raise NotImplementedError
@@ -44,11 +44,14 @@ class Tab():
     def _parse_capo(self, soup):
         raise NotImplementedError
 
-        def _parse_type(self, soup):
-            raise NotImplementedError
+    def _parse_type(self, soup):
+        raise NotImplementedError
 
     def _parse_text(self, soup):
         raise NotImplementedError
 
     def _parse_rating(self, soup):
         raise NotImplementedError
+
+    def __repr__(self):
+        return "<Tab(url={self.url}, title={self.title}, artist={self.artist})>".format(self=self)
