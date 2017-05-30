@@ -30,6 +30,5 @@ class Tab(BaseTab):
         super(Tab, self).__init__(url, title, artist, rating, type_)
 
     def _parse_title(self, soup):
-        import pdb; pdb.set_trace()
         td = soup.find('strong', text="Title").parent
         return td.next_sibling.find('span').text

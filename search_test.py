@@ -1,8 +1,12 @@
-import tabload.services.ukutabs.Search
+import tabload.services.ukutabs
 
-s = tabload.services.ukutabs.Search.UkuTabsSearch("d")
+s = tabload.services.ukutabs.Search("d")
 for a in s:
 	print(a)
+	a.load()
+	break
+
+
 
 #import tabload.Search
 #s = tabload.Search.Search("test")
@@ -13,4 +17,3 @@ for a in s:
 #import tabload.services.ukutabs.Service
 #s = tabload.services.ukutabs.Service.UkuTabs()
 #s.search("blank")
-
