@@ -39,3 +39,6 @@ class BaseSearch(object):
 
     def __next__(self):
         return self.iter.__next__()
+
+    def __repr__(self):
+        return "<Search(query={self.query})>".format(self=self)
