@@ -1,7 +1,7 @@
 import re
 
-from tabload.Search import Search as BaseSearch
-from tabload.Tab import Tab as BaseTab
+from tabload.BaseSearch import BaseSearch
+from tabload.BaseTab import BaseTab
 
 
 class Search(BaseSearch):
@@ -65,7 +65,6 @@ class Tab(BaseTab):
         return None
 
     def _parse_text(self, soup):
-        import pdb; pdb.set_trace()
         pre = soup.select_one("div#cont pre")
         return pre.text
 

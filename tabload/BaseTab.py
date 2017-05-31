@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Tab():
+class BaseTab():
     """docstring for Tab."""
     def __init__(self, url, title, artist, rating, type_, instrument):
         self.url = url

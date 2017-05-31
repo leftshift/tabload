@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 # TODO: Save instruments somewhere?
 
 
-class Search(object):
+class BaseSearch(object):
     """docstring for Search."""
     search_url = "https://test.org/?s={query}&p={page}"
 
