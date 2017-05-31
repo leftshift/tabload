@@ -18,12 +18,14 @@ def combined_results(results):
             try:
                 yield search.__next__()
             except StopIteration:
-                # All results for this service have been consumed, we can delete the search
+                # All results for this service have been consumed,
+                # we can delete the search
                 results[service] = None
                 continue
 
 
-def search(query, instruments=default_instruments, services=default_services, items=10):
+def search(query, instruments=default_instruments,
+           services=default_services, items=10):
     results = {}
 
     service_mods = [getattr(tabload.services, s) for s in services]
