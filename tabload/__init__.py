@@ -5,7 +5,7 @@ def main():
     parser = argparse.ArgumentParser(description="Downloads Tabs or Chords from various sites and exports them to different formats.")
 
     parser.add_argument("Title or URL",
-                        help="Search String to search for")
+                        help="String to search for")
     parser.add_argument("-f", "--format",
                         help="Output format",
                         default="txt")
