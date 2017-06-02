@@ -17,11 +17,9 @@ def main(screen, search):
     height, width = screen.getmaxyx()
 
     results = []
-    results.append(_get_page(search, 5))
+    results.append(_get_page(search, height - 2))
 
     z = zip(range(len(results[0])), results[0])
-
-    import pudb; pudb.set_trace()
 
     for line, result in zip(range(len(results[0])), results[0]):
         screen.addstr(line, 0, result.title)
