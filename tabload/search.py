@@ -25,7 +25,7 @@ def combined_results(results):
 
 
 def search(query, instruments=default_instruments,
-           services=default_services, items=10):
+           services=default_services):
     results = {}
 
     service_mods = [getattr(tabload.services, s) for s in services]
@@ -34,10 +34,5 @@ def search(query, instruments=default_instruments,
         results[service] = module.Search(query)
 
     combined = combined_results(results)
-
     while True:
-        page = []
-        while len(page) < items:
-            page.append(combined.__next__())
-        print(page)
-        yield page
+        yield combined.__next__()
