@@ -1,4 +1,4 @@
-"""Base Class for tab or chord sheets""""
+"""Base Class for tab or chord sheets"""
 
 import requests
 from bs4 import BeautifulSoup
@@ -8,7 +8,8 @@ class BaseTab():
     """Acts both as a representation of a search result and a
     fully downloaded Tab.
 
-    To adapt to a service, you'll probably only have to implement all the _parse_foo()-functions."""
+    To adapt to a service, you'll probably only have to implement
+    all the _parse_foo()-functions."""
     def __init__(self, url, title, artist, rating, type_, instrument):
         self.url = url
         self.title = title
