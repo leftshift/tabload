@@ -19,6 +19,9 @@ class Search(BaseSearch):
 
     def items(self, soup):
         table = soup.find(class_='latestlist3')
+        if not table:
+            raise StopIteration
+
         for li in table:
             typ = li.find(class_='tabtype').string
             a = li.find_all('a')
