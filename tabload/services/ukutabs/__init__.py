@@ -15,8 +15,8 @@ class Search(BaseSearch):
         pagination = self.soup.find(class_='page-pagination')
         return max([int(t.text) for t in pagination.find_all()])
 
-    def items(self):
-        table = self.soup.find(class_='latestlist3')
+    def items(self, soup):
+        table = soup.find(class_='latestlist3')
         for li in table:
             typ = li.find(class_='tabtype').string
             a = li.find_all('a')
