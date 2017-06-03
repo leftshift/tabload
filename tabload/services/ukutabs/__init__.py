@@ -13,6 +13,8 @@ class Search(BaseSearch):
 
     def _get_number_of_pages(self):
         pagination = self.soup.find(class_='page-pagination')
+        if not pagination:  # There is probably only one page
+            return 1
         return max([int(t.text) for t in pagination.find_all()])
 
     def items(self, soup):
