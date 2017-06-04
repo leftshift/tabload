@@ -1,9 +1,15 @@
+"""Base Class for tab or chord sheets"""
+
 import requests
 from bs4 import BeautifulSoup
 
 
 class BaseTab():
-    """docstring for Tab."""
+    """Acts both as a representation of a search result and a
+    fully downloaded Tab.
+
+    To adapt to a service, you'll probably only have to implement
+    all the _parse_foo()-functions."""
     def __init__(self, url, title, artist, rating, type_, instrument):
         self.url = url
         self.title = title
@@ -13,6 +19,7 @@ class BaseTab():
         self.instrument = instrument
 
     def load(self):
+        """Call this to download the html for this Tab and parse it."""
         self._load_html()
         self._parse()
 
@@ -20,6 +27,8 @@ class BaseTab():
         self.html = requests.get(self.url).text
 
     def _parse(self):
+        """Creates a soup from the downloaded html, passes it to all the
+        parse functions and sets the attributes accordingly."""
         soup = BeautifulSoup(self.html, 'lxml')
         self.title = self._parse_title(soup)
         self.artist = self._parse_artist(soup)
@@ -32,6 +41,8 @@ class BaseTab():
         self.notes = self._parse_notes(soup)
 
     def _parse_title(self, soup):
+        """Returns the title of this tab, given the
+        BeautifulSoup representation of the page."""
         raise NotImplementedError
 
     def _parse_artist(self, soup):
