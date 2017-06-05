@@ -33,6 +33,7 @@ class Search(BaseSearch):
 
 class Tab(BaseTab):
     """docstring for Tab."""
+    service = "ukutabs"
     r_difficulty = re.compile("Difficulty level ([1-5]/5)")
 
     def __init__(self, url, title, artist, rating, type_):

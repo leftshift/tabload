@@ -9,7 +9,10 @@ class BaseTab():
     fully downloaded Tab.
 
     To adapt to a service, you'll probably only have to implement
-    all the _parse_foo()-functions."""
+    all the _parse_foo()-functions and set the `service` string."""
+
+    service = None
+
     def __init__(self, url, title, artist, rating, type_, instrument):
         self.url = url
         self.title = title
