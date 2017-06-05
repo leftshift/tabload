@@ -3,7 +3,6 @@ import itertools
 
 from tabload import result_view
 
-columns = "{title:{width['title']}}{artist:{width['artist']}}"
 
 def _init(screen):
     curses.start_color()
@@ -16,12 +15,7 @@ def main(screen, search):
     global height, width
     height, width = screen.getmaxyx()
 
-    w_header = screen.derwin(2,width-1, 0,0)
-    w_header.addstr("Test")
-    w_header.hline(1,0, '-', width-1)
-    w_header.refresh()
-
-    w_results = screen.subwin(height-2, width, 2,0)
+    w_results = screen.subwin(height, width, 0,0)
 
     r_view = result_view.ResultView(w_results, search)
 
