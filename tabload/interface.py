@@ -5,6 +5,7 @@ from tabload import result_view
 
 
 def _init(screen):
+    curses.curs_set(0)
     curses.start_color()
     curses.use_default_colors()
     screen.keypad(True)

@@ -1,14 +1,17 @@
 import itertools
 import curses
 
-columns = "{title:{width['title']}}{artist:{width['artist']}}"
-
 
 class ResultView:
+    columns = ['title', 'artist', 'service']
+
     def __init__(self, window, search):
         height, width = window.getmaxyx()
 
         self.w_header = window.derwin(2,width-1, 0,0)
+
+        self._max_width = self.w_header.getmaxyx()[1] // len(self.columns)
+        self.generate_format_string()
         self._display_header()
         self.w_results = window.derwin(height-2,width-1, 2,0)
         self.search = search
@@ -20,18 +23,33 @@ class ResultView:
 
         self.items_per_page = self.w_results.getmaxyx()[0]
 
-    @staticmethod
-    def _generate_line(result):
-        return result.title
+    def generate_format_string(self):
+        width = {}
+        # for column in self.colums:
+        #     longest = max([len(getattr(column, r)) for r in self.results])
+        #     width = min(longest, max_width)
 
-    @staticmethod
-    def _generate_header():
-        pass
+        format_string = []
+
+        for column in self.columns:
+            line = "{{:<{width}}}".format(width=self._max_width)
+            format_string.append(line)
+
+        self.format_string = ''.join(format_string)
+
+
+    def _generate_line(self, result):
+        t = [getattr(result, a)[:self._max_width] for a in self.columns]
+        return self.format_string.format(*t)
+
+    def _generate_header(self):
+        t = [c[:self._max_width] for c in self.columns]
+        return self.format_string.format(*t)
 
     def _display_header(self):
         width = self.w_header.getmaxyx()[1]
 
-        self.w_header.addstr("Test")
+        self.w_header.addstr(self._generate_header())
         self.w_header.hline(1,0, '-', width)
         self.w_header.refresh()
 
@@ -53,10 +71,8 @@ class ResultView:
 
         self.w_results.clear()
 
-        res_lines = zip(range(len(page)), page)
-
-        for line, result in res_lines:
-            self.w_results.addstr(line, 0, self._generate_line(result))
+        for line, result in enumerate(page):
+            self.w_results.insstr(line, 0, self._generate_line(result))
 
         self._screen_start = starting_from
         self._screen_end = starting_from + len(page)
@@ -69,7 +85,7 @@ class ResultView:
         self._selected = item
 
         curr_line = self._selected - self._screen_start
-        self.w_results.addstr(curr_line, 0,
+        self.w_results.insstr(curr_line, 0,
                               self._generate_line(self.results[self._selected]), curses.A_BOLD)
         self.w_results.refresh()
 
@@ -80,7 +96,7 @@ class ResultView:
         prev_selected = self._selected
 
         prev_line = prev_selected - self._screen_start
-        self.w_results.addstr(prev_line, 0,
+        self.w_results.insstr(prev_line, 0,
                               self._generate_line(self.results[prev_selected]))
 
         self._select(item)
