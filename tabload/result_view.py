@@ -79,3 +79,6 @@ class ResultView:
 
     def prev_item(self):
         self._select_and_clear(self._selected - 1)
+
+    def get_curr_item(self):
+        return self.results[self._selected]

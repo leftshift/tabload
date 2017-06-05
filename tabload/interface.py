@@ -38,6 +38,9 @@ def main(screen, search):
             r_view.prev_item()
         if k == 'KEY_DOWN':
             r_view.next_item()
+        if k == "KEY_ENTER" or k == " ":
+            tab = r_view.get_curr_item()
+            print(tab)
         if k == 'q':
             break
 
