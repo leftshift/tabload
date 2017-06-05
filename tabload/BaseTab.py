@@ -15,7 +15,7 @@ class BaseTab():
         self.title = title
         self.artist = artist
         self.rating = rating
-        self.type = type_
+        self.type_ = type_
         self.instrument = instrument
 
     def load(self):
@@ -35,7 +35,7 @@ class BaseTab():
         self.album = self._parse_album(soup)
         self.difficulty = self._parse_difficulty(soup)
         self.capo = self._parse_capo(soup)
-        self.type = self._parse_type(soup)
+        self.type_ = self._parse_type(soup)
         self.rating = self._parse_rating(soup)
         self.text = self._parse_text(soup)
         self.notes = self._parse_notes(soup)
