@@ -42,6 +42,17 @@ class TabView:
             self.posy = self.height - self.window.getmaxyx()[0]
         self.show()
 
+    def scroll_left(self, amount=1):
+        self.posx = max(0, self.posx - amount)
+        self.show()
+
+    def scroll_right(self, amount=1):
+        if self.posx + amount + self.window.getmaxyx()[1] < self.width:
+            self.posx = self.posx + amount
+        else:
+            self.posx = self.width - self.window.getmaxyx()[1]
+        self.show()
+
     def page_up(self):
         self.scroll_up(self.window.getmaxyx()[0])
 
