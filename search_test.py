@@ -1,7 +1,13 @@
 import tabload.search
+import tabload.formats.text
 
-for r in tabload.search.search("e"):
-	print(r)
+s = tabload.search.search("d")
+r = s.__next__()
+r.load()
+print(tabload.formats.text.generate(r))
+
+#for r in tabload.search.search("e"):
+#	print(r)
 
 # s = tabload.services.ukutabs.Search("e")
 # for a in s:
