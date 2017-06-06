@@ -60,6 +60,10 @@ def main(screen, search):
                 k = screen.getkey()
                 if k == 'KEY_UP':
                     t_view.scroll_up()
+                if k == 'KEY_PPAGE':
+                    t_view.page_up()
+                if k == 'KEY_NPAGE':
+                    t_view.page_down()
                 if k == 'KEY_DOWN':
                     t_view.scroll_down()
                 if k == 'KEY_RIGHT':
