@@ -20,11 +20,13 @@ class BaseTab():
         self.rating = rating
         self.type_ = type_
         self.instrument = instrument
+        self.loaded = False
 
     def load(self):
         """Call this to download the html for this Tab and parse it."""
         self._load_html()
         self._parse()
+        self.loaded = True
 
     def _load_html(self):
         self.html = requests.get(self.url).text
