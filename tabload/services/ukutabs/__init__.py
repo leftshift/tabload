@@ -45,16 +45,16 @@ class Tab(BaseTab):
 
     def _parse_artist(self, soup):
         td = soup.find('strong', text="Artist").parent
-        return td.next_sibling.text
+        return td.next_sibling.text.strip()
 
     def _parse_album(self, soup):
         td = soup.find('strong', text="Album").parent
-        return td.next_sibling.text
+        return td.next_sibling.text.strip()
 
     def _parse_difficulty(self, soup):
         a = soup.find(class_="kooltip")
         i = a.find("i")
-        return self.r_difficulty.match(i.string)
+        return self.r_difficulty.match(i.string).group(1)
 
     def _parse_capo(self, soup):
         b = soup.find(class_="boettonon")
@@ -64,7 +64,7 @@ class Tab(BaseTab):
         # Type doesn't appear on actual page
         # If we got here from search results, just keep that
         # If we didn't, we simply don't know
-        return self.type
+        return self.type_
 
     def _parse_rating(self, soup):
         # No ratings
