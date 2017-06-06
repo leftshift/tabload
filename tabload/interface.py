@@ -6,6 +6,7 @@ from tabload import tab_view
 
 
 tip_results = "Arrow keys: Select result\tEnter/Space: Select\tn/p: next/prev page\tq: quit"
+tip_tab = "Arrow keys: Scroll\tBackspace: Return to results"
 
 def _init(screen):
     curses.curs_set(0)
@@ -54,6 +55,7 @@ def main(screen, search):
             tab = r_view.get_curr_item()
             t_view = tab_view.TabView(w_results, tab)
             t_view.show()
+            show_tooltip(w_tips, tip_tab)
             while True:
                 k = screen.getkey()
                 if k == 'KEY_UP':
@@ -67,6 +69,7 @@ def main(screen, search):
                 if k in ('KEY_BACKSPACE', 'r', 'q'):
                     break
             r_view.refresh()
+            show_tooltip(w_tips, tip_results)
         if k == 'q':
             break
 
