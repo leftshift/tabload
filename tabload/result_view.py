@@ -49,7 +49,7 @@ class ResultView:
     def _display_header(self):
         width = self.w_header.getmaxyx()[1]
 
-        self.w_header.addstr(self._generate_header())
+        self.w_header.insstr(self._generate_header())
         self.w_header.hline(1,0, '-', width)
         self.w_header.refresh()
 
@@ -119,5 +119,11 @@ class ResultView:
         return self.results[self._selected]
 
     def refresh(self):
-        self.w_header.refresh()
-        self.w_results.refresh()
+        selection = self._selected
+        self.w_header.clear()
+        self.w_results.clear()
+
+        self._display_header()
+        self.display_page(self._screen_start)
+
+        self._select_and_clear(selection)
