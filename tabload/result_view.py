@@ -117,3 +117,7 @@ class ResultView:
 
     def get_curr_item(self):
         return self.results[self._selected]
+
+    def refresh(self):
+        self.w_header.refresh()
+        self.w_results.refresh()
