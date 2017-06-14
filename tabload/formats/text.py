@@ -5,6 +5,7 @@ Difficulty: {tab.difficulty}
 Capo: {tab.capo}
 Rating: {tab.rating}
 Type: {tab.type_}
+Url: {tab.url}
 
 Notes:
 {tab.notes}
