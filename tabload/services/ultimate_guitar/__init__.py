@@ -53,25 +53,27 @@ class Tab(BaseTab):
         super(Tab, self).__init__(url, title, artist, rating, type_, instrument)
 
     def _parse_title(self, soup):
-        td = soup.find('strong', text="Title").parent
-        return td.next_sibling.find('span').text
+        title_div = soup.find(class_="t_title")
+        title = title_div.find("h1").text.strip()
+
+        version_div = title_div.find(class_="t_version")
+        if version_div:
+            title += " " + version_div.text.strip()
+        return title
 
     def _parse_artist(self, soup):
-        td = soup.find('strong', text="Artist").parent
-        return td.next_sibling.text.strip()
+        title_div = soup.find(class_="t_title")
+        author_div = title_div.find(class_="t_autor")
+        return author_div.find("a").text
 
     def _parse_album(self, soup):
-        td = soup.find('strong', text="Album").parent
-        return td.next_sibling.text.strip()
+        return None
 
     def _parse_difficulty(self, soup):
-        a = soup.find(class_="kooltip")
-        i = a.find("i")
-        return self.r_difficulty.match(i.string).group(1)
+        return None  # No difficulty
 
     def _parse_capo(self, soup):
-        b = soup.find(class_="boettonon")
-        return b.get("value")
+        return ""  # TODO:
 
     def _parse_type(self, soup):
         # Type doesn't appear on actual page
@@ -80,16 +82,12 @@ class Tab(BaseTab):
         return self.type_
 
     def _parse_rating(self, soup):
-        # No ratings
+        # TODO:
         return None
 
     def _parse_text(self, soup):
-        pre = soup.select_one("div#cont pre")
-        return pre.text
+        pre = soup.find(class_="js-tab-content")
+        return pre.text.replace("\r\n", "\n")
 
     def _parse_notes(self, soup):
-        pre = soup.find("pre", class_="quotae-code", id="extranote")
-        if pre:
-            return pre.text
-        else:
-            return ""
+        return soup.find(class_="b-tab-meta").text
