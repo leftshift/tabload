@@ -23,12 +23,12 @@ class Search(BaseSearch):
             raise StopIteration
 
         for li in table:
-            typ = li.find(class_='tabtype').string
+            type_ = li.find(class_='tabtype').string
             a = li.find_all('a')
             artist = a[0].string
             title = a[1].string
             url = a[1].get('href')
-            yield Tab(url, title, artist, None, typ)
+            yield Tab(url, title, artist, None, type_)
 
 
 class Tab(BaseTab):
