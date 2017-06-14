@@ -39,7 +39,7 @@ class ResultView:
 
 
     def _generate_line(self, result):
-        t = [getattr(result, a)[:self._max_width] for a in self.columns]
+        t = [getattr(result, a)[:self._max_width-1] for a in self.columns]
         return self.format_string.format(*t)
 
     def _generate_header(self):
