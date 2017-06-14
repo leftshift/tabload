@@ -42,11 +42,15 @@ class Search(BaseSearch):
 
 class Tab(BaseTab):
     """docstring for Tab."""
-    service = "ukutabs"
+    service = "ultimate_guitar"
     r_difficulty = re.compile("Difficulty level ([1-5]/5)")
 
     def __init__(self, url, title, artist, rating, type_):
-        super(Tab, self).__init__(url, title, artist, rating, type_, "ukulele")
+        if type_ not in ("chords", "tab"):
+            instrument = type_
+        else:
+            instrument = None
+        super(Tab, self).__init__(url, title, artist, rating, type_, instrument)
 
     def _parse_title(self, soup):
         td = soup.find('strong', text="Title").parent
