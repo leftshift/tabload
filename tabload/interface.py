@@ -51,26 +51,26 @@ def main(screen, search):
             r_view.prev_item()
         if k == 'KEY_DOWN':
             r_view.next_item()
-        if k == "KEY_ENTER" or k == " ":
+        if k in ("KEY_ENTER", " ", "\n", "\r"):
             tab = r_view.get_curr_item()
             t_view = tab_view.TabView(w_results, tab)
             t_view.show()
             show_tooltip(w_tips, tip_tab)
             while True:
-                k = screen.getkey()
-                if k == 'KEY_UP':
+                l = screen.getkey()
+                if l == 'KEY_UP':
                     t_view.scroll_up()
-                if k == 'KEY_PPAGE':
+                if l == 'KEY_PPAGE':
                     t_view.page_up()
-                if k == 'KEY_NPAGE':
+                if l == 'KEY_NPAGE':
                     t_view.page_down()
-                if k == 'KEY_DOWN':
+                if l == 'KEY_DOWN':
                     t_view.scroll_down()
-                if k == 'KEY_RIGHT':
+                if l == 'KEY_RIGHT':
                     t_view.scroll_right()
-                if k == 'KEY_LEFT':
+                if l == 'KEY_LEFT':
                     t_view.scroll_left()
-                if k in ('KEY_BACKSPACE', 'r', 'q'):
+                if l in ('KEY_BACKSPACE', 'r', 'q'):
                     break
             r_view.refresh()
             show_tooltip(w_tips, tip_results)
