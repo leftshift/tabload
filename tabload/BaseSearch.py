@@ -42,7 +42,6 @@ class BaseSearch(object):
 
     def results(self):
         """The main generator function. Yields `Tab`s for the given query."""
-        import pudb; pudb.set_trace()
         for page in self.pages(self.soup):
             self.soup = page
             for item in self.items(self.soup):
