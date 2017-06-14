@@ -1,3 +1,3 @@
-from . import ukutabs
+from . import ukutabs, ultimate_guitar
 
-__all__ = ['ukutabs']
+__all__ = ['ukutabs', 'ultimate_guitar']
