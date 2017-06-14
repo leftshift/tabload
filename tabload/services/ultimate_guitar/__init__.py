@@ -36,7 +36,7 @@ class Search(BaseSearch):
             rating = None
             typ = cols[3].text.strip()
 
-            if "pro" not in typ and typ != "official":
+            if "pro" not in typ and typ not in ("official", "power", "video"):
                 yield Tab(url, title, artist, rating, typ)
 
 
@@ -49,7 +49,7 @@ class Tab(BaseTab):
         if type_ not in ("chords", "tab"):
             instrument = type_
         else:
-            instrument = None
+            instrument = ""
         super(Tab, self).__init__(url, title, artist, rating, type_, instrument)
 
     def _parse_title(self, soup):
