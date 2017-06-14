@@ -23,7 +23,7 @@ class BaseSearch(object):
     def __init__(self, query):
         self.query = query
         html = requests.get(self.search_url.format(query=query, page=1)).text
-        self.soup = BeautifulSoup(html, 'html.parser')
+        self.soup = BeautifulSoup(html, 'lxml')
         self.iter = self.results()
 
     def __iter__(self):
@@ -42,6 +42,7 @@ class BaseSearch(object):
 
     def results(self):
         """The main generator function. Yields `Tab`s for the given query."""
+        import pudb; pudb.set_trace()
         for page in self.pages(self.soup):
             self.soup = page
             for item in self.items(self.soup):
