@@ -3,7 +3,7 @@ import curses
 
 
 class ResultView:
-    columns = ['title', 'artist', 'service']
+    columns = ['title', 'artist', 'instrument', 'service']
 
     def __init__(self, window, search):
         height, width = window.getmaxyx()
