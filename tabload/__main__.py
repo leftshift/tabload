@@ -1,6 +1,7 @@
 import argparse
 import tabload.search
 import tabload.interface
+from tabload import g
 
 
 def main():
@@ -11,12 +12,21 @@ def main():
     parser.add_argument("-f", "--format",
                         help="Output format",
                         default="txt")
-    parser.add_argument("-i", "--instrument",
-                        help="The Instrument for wich tabs should be searched")
-    parser.add_argument("-s", "--service",
+    parser.add_argument("-i", "--instruments",
+                        help="The Instrument for wich tabs should be searched",
+                        nargs='+')
+    parser.add_argument("-s", "--services",
                         help="Name(s) of the services to search",
                         nargs='+')
     args = parser.parse_args()
+
+    if hasattr(args, 'format'):
+        g.export_format = args.format
+    if hasattr(args, 'instruments'):
+        g.instruments = args.instruments
+    if hasattr(args, 'services'):
+        g.services = args.services
+
     print(args)
 
     search = tabload.search.search(args.String)
