@@ -24,6 +24,7 @@ def search(query, instruments, services):
 
     service_mods = []
 
+
     for service in services:
         module = getattr(tabload.services, service)
         if module.instruments.intersection(instruments):
@@ -31,6 +32,9 @@ def search(query, instruments, services):
 
     for service, module in zip(services, service_mods):
         results[service] = module.Search(query)
+
+    if not results:
+        raise ValueError("You requested an impossible combination of instruments and services")
 
     combined = combined_results(results)
     while True:
