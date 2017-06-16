@@ -5,6 +5,7 @@ from tabload.BaseTab import BaseTab
 
 instruments = set(['ukulele'])
 
+
 class Search(BaseSearch):
     """docstring for UkuTabsSearch."""
     search_url = "https://ukutabs.com/page/{page}/?s={query}"

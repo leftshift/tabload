@@ -5,6 +5,7 @@ from tabload.BaseTab import BaseTab
 
 instruments = set(['ukulele', 'guitar', 'bass', 'drums'])
 
+
 class Search(BaseSearch):
     """docstring for UltimateGuitarSearch."""
     search_url = "https://www.ultimate-guitar.com/search.php%7Csearch.php3?search_type=title&order=&value={query}&page={page}"
