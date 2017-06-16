@@ -38,4 +38,6 @@ def search(query, instruments, services):
 
     combined = combined_results(results)
     while True:
-        yield combined.__next__()
+        tab = combined.__next__()
+        if not tab.instrument or tab.instrument in instruments:
+            yield tab
