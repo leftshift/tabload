@@ -6,7 +6,7 @@ from tabload import utils
 
 
 tip_results = "Arrow keys: Select result\tEnter/Space: Select\tn/p: next/prev page\tq: quit"
-tip_tab = "Arrow keys: Scroll\tBackspace: Return to results"
+tip_tab = "Arrow keys: Scroll\tBackspace: Return to results\tS: Export"
 
 def _init(screen):
     curses.curs_set(0)
