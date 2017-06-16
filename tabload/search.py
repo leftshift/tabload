@@ -1,9 +1,4 @@
 import tabload.services
-# all services: tabload.services.__all__
-
-# TODO: Move to config/Make user configurable
-default_services = tabload.services.__all__
-default_instruments = ['chords']
 
 
 def combined_results(results):
@@ -24,8 +19,7 @@ def combined_results(results):
                 continue
 
 
-def search(query, instruments=default_instruments,
-           services=default_services):
+def search(query, instruments, services):
     results = {}
 
     service_mods = [getattr(tabload.services, s) for s in services]

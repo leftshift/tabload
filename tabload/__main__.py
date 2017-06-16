@@ -14,9 +14,11 @@ def main():
                         default="text")
     parser.add_argument("-i", "--instruments",
                         help="The Instrument for wich tabs should be searched",
+                        default=g.instruments,
                         nargs='+')
     parser.add_argument("-s", "--services",
                         help="Name(s) of the services to search",
+                        default=g.services,
                         nargs='+')
     args = parser.parse_args()
 
@@ -29,7 +31,7 @@ def main():
 
     print(args)
 
-    search = tabload.search.search(args.String)
+    search = tabload.search.search(args.String, g.instruments, g.services)
 
     tabload.interface.display_results(search)
 
