@@ -22,7 +22,12 @@ def combined_results(results):
 def search(query, instruments, services):
     results = {}
 
-    service_mods = [getattr(tabload.services, s) for s in services]
+    service_mods = []
+
+    for service in services:
+        module = getattr(tabload.services, service)
+        if module.instruments.intersection(instruments):
+            service_mods.append(module)
 
     for service, module in zip(services, service_mods):
         results[service] = module.Search(query)

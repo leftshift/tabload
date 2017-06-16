@@ -3,7 +3,7 @@ import re
 from tabload.BaseSearch import BaseSearch
 from tabload.BaseTab import BaseTab
 
-instruments = ['ukulele', 'guitar', 'bass', 'drums']
+instruments = set(['ukulele', 'guitar', 'bass', 'drums'])
 
 class Search(BaseSearch):
     """docstring for UltimateGuitarSearch."""
