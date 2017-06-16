@@ -1,3 +1,4 @@
+suffix = "txt"
 format_string = """Title: {tab.title}
 Artist: {tab.artist}
 Album: {tab.album}

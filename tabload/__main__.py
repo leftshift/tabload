@@ -11,7 +11,7 @@ def main():
                         help="String to search for")
     parser.add_argument("-f", "--format",
                         help="Output format",
-                        default="txt")
+                        default="text")
     parser.add_argument("-i", "--instruments",
                         help="The Instrument for wich tabs should be searched",
                         nargs='+')

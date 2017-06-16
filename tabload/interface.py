@@ -1,8 +1,8 @@
 import curses
 import itertools
 
-from tabload import result_view
-from tabload import tab_view
+from tabload import result_view, tab_view
+from tabload import utils
 
 
 tip_results = "Arrow keys: Select result\tEnter/Space: Select\tn/p: next/prev page\tq: quit"
@@ -70,6 +70,8 @@ def main(screen, search):
                     t_view.scroll_right()
                 if l == 'KEY_LEFT':
                     t_view.scroll_left()
+                if l == "s":
+                    utils.export(tab)
                 if l in ('KEY_BACKSPACE', 'r', 'q'):
                     break
             r_view.refresh()
