@@ -5,6 +5,7 @@ import re
 from bs4 import BeautifulSoup
 
 from tabload import g
+from tabload import utils
 
 
 class BaseTab():
@@ -32,7 +33,9 @@ class BaseTab():
         self.loaded = True
 
     def transpose(self, semitones):
-        pass
+        assert self.loaded
+        # TODO: Maybe keep around original text?
+        self.text = g.r_chord.sub(utils.transposer(semitones), self.text)
 
     def get_chords(self):
         assert self.loaded
