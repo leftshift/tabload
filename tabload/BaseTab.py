@@ -35,7 +35,6 @@ class BaseTab():
         pass
 
     def get_chords(self):
-        import pudb; pudb.set_trace()
         assert self.loaded
         return set(g.r_chord.findall(self.text))
 
