@@ -38,6 +38,7 @@ def main(screen, search):
     show_tooltip(w_tips, tip_results)
 
     while True:
+        # TODO: Move key dispatching to views
         k = screen.getkey()
         if k == 'n':
             show_tooltip(w_tips, "Loading…")
@@ -72,6 +73,10 @@ def main(screen, search):
                     t_view.scroll_left()
                 if l == "s":
                     utils.export(tab)
+                if l == "+":
+                    t_view.transpose_up()
+                if l == "-":
+                    t_view.transpose_down()
                 if l in ('KEY_BACKSPACE', 'r', 'q'):
                     break
             r_view.refresh()

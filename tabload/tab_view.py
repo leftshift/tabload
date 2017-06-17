@@ -18,6 +18,12 @@ class TabView:
         clip_box.extend(endxy)
 
         self.clip_box = clip_box
+        self._load_text()
+
+        self.posx = 0
+        self.posy = 0
+
+    def _load_text(self):
         text = tabload.formats.text.generate(self.tab)
         self.height = len(text.split('\n'))
         self.width = max([len(line) for line in text.split('\n')])
@@ -25,11 +31,18 @@ class TabView:
         self.pad = curses.newpad(self.height, self.width)
         self.pad.insstr(text)
 
-        self.posx = 0
-        self.posy = 0
-
     def show(self):
         self.pad.refresh(self.posy, self.posx, *self.clip_box)
+
+    def transpose_up(self):
+        self.tab.transpose(1)
+        self._load_text()
+        self.show()
+
+    def transpose_down(self):
+        self.tab.transpose(-1)
+        self._load_text()
+        self.show()
 
     def scroll_up(self, amount=1):
         self.posy = max(0, self.posy - amount)

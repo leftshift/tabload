@@ -4,6 +4,7 @@ from . import g
 
 notes = ['A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab']
 
+
 def export(tab):
     out_dir = os.path.expanduser(g.out_dir)
     if not os.path.isdir(out_dir):
@@ -19,6 +20,7 @@ def export(tab):
 def transposer(semitones):
     """Returns a function for re.sub() that transposes all chord matches by
     the given number of semitones."""
+    # TODO: Handle sharps
     def f(match):
         note = match.group(3)
         prev_note = notes.index(note)
