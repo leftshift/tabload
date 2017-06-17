@@ -1,7 +1,10 @@
 """Base Class for tab or chord sheets"""
 
 import requests
+import re
 from bs4 import BeautifulSoup
+
+from tabload import g
 
 
 class BaseTab():
@@ -27,6 +30,14 @@ class BaseTab():
         self._load_html()
         self._parse()
         self.loaded = True
+
+    def transpose(self, semitones):
+        pass
+
+    def get_chords(self):
+        import pudb; pudb.set_trace()
+        assert self.loaded
+        return set(g.r_chord.findall(self.text))
 
     def _load_html(self):
         self.html = requests.get(self.url).text
