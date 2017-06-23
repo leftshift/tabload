@@ -63,7 +63,7 @@ def main(screen, search):
                     t_view.scroll_up()
                 if l == 'KEY_PPAGE':
                     t_view.page_up()
-                if l == 'KEY_NPAGE':
+                if l == 'KEY_NPAGE' or l == " ":
                     t_view.page_down()
                 if l == 'KEY_DOWN':
                     t_view.scroll_down()
