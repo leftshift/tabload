@@ -1,0 +1,3 @@
+[submodule "chordata"]
+	path = chordata
+	url = git@github.com:leftshift/chordata.git
