@@ -20,6 +20,9 @@ def main():
                         help="Name(s) of the services to search",
                         default=g.services,
                         nargs='+')
+    parser.add_argument("-c", "--chords",
+                        help="Show chord diagrams",
+                        action="store_true")
     args = parser.parse_args()
 
     if hasattr(args, 'format'):
@@ -28,6 +31,15 @@ def main():
         g.instruments = args.instruments
     if hasattr(args, 'services'):
         g.services = args.services
+    if args.chords:
+        try:
+            import chordata.utils
+            instrument_name = g.ch_mapping.get(g.instruments[0])
+            g.ch_instrument = chordata.utils.get_instrument(instrument_name)
+            g.ch_diff_dict = chordata.utils.build_diff_dict(g.ch_instrument[1])
+            g.chord_diagrams = True
+        except Exception as e:
+            print("Chord diagrams failed:{}".format(e))
 
     print(args)
 
