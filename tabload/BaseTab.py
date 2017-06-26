@@ -39,7 +39,7 @@ class BaseTab():
 
     def get_chords(self):
         assert self.loaded
-        return set(g.r_chord.findall(self.text))
+        return set([m[1] for m in g.r_chord.findall(self.text)])
 
     def _load_html(self):
         self.html = requests.get(self.url).text
