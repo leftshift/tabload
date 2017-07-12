@@ -24,6 +24,7 @@ class BaseTab():
         self.rating = rating
         self.type_ = type_
         self.instrument = instrument
+        self.transposition = 0
         self.loaded = False
 
     def load(self):
@@ -34,8 +35,9 @@ class BaseTab():
 
     def transpose(self, semitones):
         assert self.loaded
+        self.transposition = (self.transposition + semitones + 12) % 12
         # TODO: Maybe keep around original text?
-        self.text = g.r_chord.sub(utils.transposer(semitones), self.text)
+        self.text = g.r_chord.sub(utils.transposer(self.transposition), self.original_text)
 
     def get_chords(self):
         assert self.loaded
@@ -55,7 +57,8 @@ class BaseTab():
         self.capo = self._parse_capo(soup)
         self.type_ = self._parse_type(soup)
         self.rating = self._parse_rating(soup)
-        self.text = self._parse_text(soup)
+        self.original_text = self._parse_text(soup)
+        self.text = self.original_text
         self.notes = self._parse_notes(soup)
 
     def _parse_title(self, soup):
