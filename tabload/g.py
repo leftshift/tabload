@@ -13,5 +13,16 @@ export_format = "text"
 instruments = ['guitar', 'ukulele', 'bass']
 services = ["ukutabs", "ultimate_guitar"]
 
+# Stuff for chordata
+chord_diagrams = False
+ch_mapping = {
+    "guitar": "guitar",
+    "guitardd": "guitardd",
+    "mandolin": "mando",
+    "ukulele": "uke"
+}
+ch_instrument = (None, None)
+ch_diff_dict = None
+
 name_scheme = "{tab.artist} – {tab.title}.{suffix}"
 out_dir = "./out"

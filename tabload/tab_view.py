@@ -1,4 +1,5 @@
 import curses
+from tabload import g
 import tabload.formats.text
 
 class TabView:
@@ -24,7 +25,16 @@ class TabView:
         self.posy = 0
 
     def _load_text(self):
-        text = tabload.formats.text.generate(self.tab)
+        chords = []
+        if g.chord_diagrams:
+            import chordata.utils
+            chord_names = self.tab.get_chords()
+            for chord in chord_names:
+                chords.extend(chordata.utils.get_chords(g.ch_instrument[0],
+                                                        g.ch_instrument[1], chord))
+
+        text = tabload.formats.text.generate(self.tab, g.ch_instrument[0], chords)
+
         self.height = len(text.split('\n'))
         self.width = max([len(line) for line in text.split('\n')])
 
