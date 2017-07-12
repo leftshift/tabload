@@ -24,7 +24,6 @@ def generate(tab, strings=None, chords=None, diff_dict=None):
     ch_string = ""
     if strings and chords:
         import chordata
-        import pudb; pudb.set_trace()
         for chord in chords:
             diagrams.append(chord[0].center(20))
             diagrams.append(chordata.utils.render(chord[1], strings))
