@@ -5,7 +5,8 @@ from tabload import g
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Downloads Tabs or Chords from various sites and exports them to different formats.")
+    parser = argparse.ArgumentParser(description="Downloads Tabs or Chords from \
+    various sites and exports them to different formats.")
 
     parser.add_argument("String",
                         help="String to search for")
@@ -46,7 +47,6 @@ def main():
     search = tabload.search.search(args.String, g.instruments, g.services)
 
     tabload.interface.display_results(search)
-
 
 
 if __name__ == '__main__':

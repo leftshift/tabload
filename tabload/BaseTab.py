@@ -1,7 +1,6 @@
 """Base Class for tab or chord sheets"""
 
 import requests
-import re
 from bs4 import BeautifulSoup
 
 from tabload import g
@@ -36,8 +35,8 @@ class BaseTab():
     def transpose(self, semitones):
         assert self.loaded
         self.transposition = (self.transposition + semitones + 12) % 12
-        # TODO: Maybe keep around original text?
-        self.text = g.r_chord.sub(utils.transposer(self.transposition), self.original_text)
+        self.text = g.r_chord.sub(utils.transposer(self.transposition),
+                                  self.original_text)
 
     def get_chords(self):
         assert self.loaded
@@ -91,4 +90,5 @@ class BaseTab():
         raise NotImplementedError
 
     def __repr__(self):
-        return "<Tab(url={self.url}, title={self.title}, artist={self.artist})>".format(self=self)
+        return "<Tab(url={self.url}, title={self.title}, "
+        "artist={self.artist})>".format(self=self)

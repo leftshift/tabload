@@ -8,7 +8,8 @@ instruments = set(['ukulele', 'guitar', 'bass', 'drums'])
 
 class Search(BaseSearch):
     """docstring for UltimateGuitarSearch."""
-    search_url = "https://www.ultimate-guitar.com/search.php%7Csearch.php3?search_type=title&order=&value={query}&page={page}"
+    search_url = "https://www.ultimate-guitar.com/search.php%7Csearch.php3?"
+    "search_type=title&order=&value={query}&page={page}"
 
     def __init__(self, query):
         super(Search, self).__init__(query)
@@ -17,7 +18,9 @@ class Search(BaseSearch):
         pagination = self.soup.find(class_='pagination')
         if not pagination:  # There is probably only one page
             return 1
-        return max([int(t.text) for t in pagination.find_all('li') if not (t.text == "« Prev" or t.text == "Next »")])
+        return max([int(t.text)
+                    for t in pagination.find_all('li')
+                    if not (t.text == "« Prev" or t.text == "Next »")])
 
     def items(self, soup):
         table = soup.find(class_="tresults")
@@ -52,7 +55,8 @@ class Tab(BaseTab):
             instrument = type_
         else:
             instrument = ""
-        super(Tab, self).__init__(url, title, artist, rating, type_, instrument)
+        super(Tab, self).__init__(
+            url, title, artist, rating, type_, instrument)
 
     def _parse_title(self, soup):
         title_div = soup.find(class_="t_title")

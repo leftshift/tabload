@@ -1,12 +1,13 @@
 import curses
-import itertools
 
 from tabload import result_view, tab_view
 from tabload import utils
 
 
-tip_results = "Arrow keys: Select result\tEnter/Space: Select\tn/p: next/prev page\tq: quit"
+tip_results = "Arrow keys: Select result\tEnter/Space: Select\t\
+    n/p: next/prev page\tq: quit"
 tip_tab = "Arrow keys: Scroll\tBackspace: Return to results\tS: Export"
+
 
 def _init(screen):
     curses.curs_set(0)
@@ -15,10 +16,12 @@ def _init(screen):
     screen.keypad(True)
     screen.clear()
 
+
 def show_tooltip(window, text):
     window.clear()
     window.insstr(text, curses.A_DIM)
     window.refresh()
+
 
 def main(screen, search):
     _init(screen)
@@ -58,26 +61,26 @@ def main(screen, search):
             t_view.show()
             show_tooltip(w_tips, tip_tab)
             while True:
-                l = screen.getkey()
-                if l == 'KEY_UP':
+                m = screen.getkey()
+                if m == 'KEY_UP':
                     t_view.scroll_up()
-                if l == 'KEY_PPAGE':
+                if m == 'KEY_PPAGE':
                     t_view.page_up()
-                if l == 'KEY_NPAGE' or l == " ":
+                if m == 'KEY_NPAGE' or m == " ":
                     t_view.page_down()
-                if l == 'KEY_DOWN':
+                if m == 'KEY_DOWN':
                     t_view.scroll_down()
-                if l == 'KEY_RIGHT':
+                if m == 'KEY_RIGHT':
                     t_view.scroll_right()
-                if l == 'KEY_LEFT':
+                if m == 'KEY_LEFT':
                     t_view.scroll_left()
-                if l == "s":
+                if m == "s":
                     utils.export(tab)
-                if l == "+":
+                if m == "+":
                     t_view.transpose_up()
-                if l == "-":
+                if m == "-":
                     t_view.transpose_down()
-                if l in ('KEY_BACKSPACE', 'r', 'q'):
+                if m in ('KEY_BACKSPACE', 'r', 'q'):
                     break
             r_view.refresh()
             show_tooltip(w_tips, tip_results)

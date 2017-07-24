@@ -50,10 +50,11 @@ class BaseSearch(object):
     def pages(self, soup):
         """The generator for accessing all the search result pages.
         Yields `BeautifulSoup`s for all the pages."""
-        n = self._get_number_of_pages()
         yield soup  # yield the already loaded page
         for i in range(2, self._get_number_of_pages()+1):
-            html = requests.get(self.search_url.format(query=self. query, page=i)).text
+            request = requests.get(
+                self.search_url.format(query=self. query, page=i))
+            html = request.text
             soup = BeautifulSoup(html, 'html.parser')
             yield soup
 

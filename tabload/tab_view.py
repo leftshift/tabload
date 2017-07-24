@@ -14,7 +14,8 @@ class TabView:
 
         clip_box = []
         # get the lowermost coordinates of the window
-        endxy = [i + j - 1 for i, j in zip(window.getbegyx(), window.getmaxyx())]
+        endxy = [i + j - 1
+                 for i, j in zip(window.getbegyx(), window.getmaxyx())]
         clip_box.extend(window.getbegyx())
         clip_box.extend(endxy)
 
@@ -31,9 +32,11 @@ class TabView:
             chord_names = self.tab.get_chords()
             for chord in chord_names:
                 chords.extend(chordata.utils.get_chords(g.ch_instrument[0],
-                                                        g.ch_instrument[1], chord))
+                                                        g.ch_instrument[1],
+                                                        chord))
 
-        text = tabload.formats.text.generate(self.tab, g.ch_instrument[0], chords)
+        text = tabload.formats.text.generate(self.tab, g.ch_instrument[0],
+                                             chords)
 
         self.height = len(text.split('\n'))
         self.width = max([len(line) for line in text.split('\n')])
@@ -62,7 +65,8 @@ class TabView:
         if self.posy + amount + self.window.getmaxyx()[0] < self.height:
             self.posy = self.posy + amount
         else:
-            # Scrolling of amount is not possible, so scroll to a position where everything up to the last line is visible
+            # Scrolling of amount is not possible, so scroll to a position
+            # where everything up to the last line is visible
             self.posy = self.height - self.window.getmaxyx()[0]
         self.show()
 

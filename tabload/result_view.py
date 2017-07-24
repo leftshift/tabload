@@ -24,7 +24,7 @@ class ResultView:
         self.items_per_page = self.w_results.getmaxyx()[0]
 
     def generate_format_string(self):
-        width = {}
+        # width = {}
         # for column in self.colums:
         #     longest = max([len(getattr(column, r)) for r in self.results])
         #     width = min(longest, max_width)
@@ -36,7 +36,6 @@ class ResultView:
             format_string.append(line)
 
         self.format_string = ''.join(format_string)
-
 
     def _generate_line(self, result):
         t = [getattr(result, a)[:self._max_width-1] for a in self.columns]
@@ -55,7 +54,8 @@ class ResultView:
 
     def display_page(self, starting_from):
         if starting_from + self.items_per_page > len(self.results):
-            # The number of results to be shown is larger than the number of results loaded
+            # The number of results to be shown is larger than the number
+            # of results loaded
             self.results.extend(
                 list(itertools.islice(
                     self.search, 0, self.items_per_page)
@@ -86,7 +86,8 @@ class ResultView:
 
         curr_line = self._selected - self._screen_start
         self.w_results.insstr(curr_line, 0,
-                              self._generate_line(self.results[self._selected]), curses.A_BOLD)
+                              self._generate_line(self.results[self._selected]),
+                              curses.A_BOLD)
         self.w_results.refresh()
 
     def _select_and_clear(self, item):
